@@ -8,9 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Jumpshare.Webcam
+namespace AForge.Webcam
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -61,20 +62,11 @@ namespace Jumpshare.Webcam
             this.DataContext = this;
             GetVideoDevices();
 
-            StartCamera();
+            //StartCamera();
         }
 
         private BitmapImage ToBitmapImage(Bitmap bitmap)
         {
-            //BitmapImage bi = new BitmapImage();
-            //bi.BeginInit();
-            //MemoryStream ms = new MemoryStream();
-            //bitmap.Save(ms, ImageFormat.Jpeg);
-            //ms.Seek(0, SeekOrigin.Begin);
-            //bi.StreamSource = ms;
-            //bi.EndInit();
-            //return bi;
-
             using (MemoryStream ms = new MemoryStream())
             {
                 bitmap.Save(ms, ImageFormat.Bmp);
@@ -252,6 +244,13 @@ namespace Jumpshare.Webcam
                 _videoSource.NewFrame -= video_NewFrame;
             }
         }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            CurrentDevice = (FilterInfo)cmb.SelectedItem;
+            StopCamera();
+            StartCamera();
+        }
 
         #region INotifyPropertyChanged members
 
@@ -283,30 +282,5 @@ namespace Jumpshare.Webcam
 
     }
 
-    public class WebCamController
-    {
-        public ObservableCollection<FilterInfo> VideoDevices { get; set; }
-
-        public static WebCamController Instance { get; } = new WebCamController();
-        static WebCamController() { }
-        public WebCamController()
-        {
-            LoadWebCams();
-        }
-
-        internal void LoadWebCams()
-        {
-            //if(Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1) // windows 7
-            VideoDevices = new ObservableCollection<FilterInfo>();
-            foreach (FilterInfo filterInfo in new FilterInfoCollection(FilterCategory.VideoInputDevice))
-            {
-                VideoDevices.Add(filterInfo);
-            }
-        }
-
-        public void Dispose()
-        {
-
-        }
-    }
+    
 }

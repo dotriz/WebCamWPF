@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AForge.Webcam.Properties {
+namespace AForge.WebCam.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
