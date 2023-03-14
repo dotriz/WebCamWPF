@@ -46,16 +46,6 @@ namespace AForge.Webcam
 
         #endregion
 
-
-        #region Private fields
-
-        double ScreenWidth = SystemParameters.PrimaryScreenWidth;
-        double ScreenHeight = SystemParameters.PrimaryScreenHeight;
-        double MaxScreenWidth = SystemParameters.PrimaryScreenWidth;
-        double MaxScreenHeight = SystemParameters.PrimaryScreenHeight;
-
-        #endregion
-
         public void WebCamSetup()
         {
             SelectedWebcam = "";
@@ -255,11 +245,6 @@ namespace AForge.Webcam
         #region INotifyPropertyChanged members
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void Stop_Click(object sender, RoutedEventArgs e)
-        {
-            StopCamera();
-        }
 
         protected void OnPropertyChanged(string propertyName)
         {
