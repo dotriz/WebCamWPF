@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
+using Windows.Media.MediaProperties;
+using System.Collections.Generic;
 
 namespace MCapture.Webcam2
 {
@@ -35,13 +37,28 @@ namespace MCapture.Webcam2
 
         async private void SetupWebCam()
         {
-            var captureManager = new MediaCapture();
-            var mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = CurrentDevice.Id };
-            await captureManager.InitializeAsync(mediaInitSettings);
+            try
+            {
+                var captureManager = new MediaCapture();
+                var mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = CurrentDevice.Id };
+                await captureManager.InitializeAsync(mediaInitSettings);
 
-            var preview = new CapturePreview(captureManager);
-            this.WebCamPlayerCircle.ImageSource = preview;
-            await preview.StartAsync();
+                var videoDeviceController = captureManager.VideoDeviceController;
+
+                // Set the desired video resolution
+                var resolutions = videoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoRecord);
+                var resolution = resolutions.FirstOrDefault(r => (r as VideoEncodingProperties)?.Height == 720u);
+                if (resolution == null) resolution = resolutions.FirstOrDefault();
+                await videoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, resolution);
+
+
+                var preview = new CapturePreview(captureManager);
+                WebCamPlayerCircle.ImageSource = preview;
+                await preview.StartAsync();
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void StartCamera()
