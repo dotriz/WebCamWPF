@@ -23,6 +23,7 @@
             <ComboBox x:Name="comboBox" Width="200" Margin="10,0,0,0" FontSize="14"
                   HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChanged"
                   DisplayMemberPath="Name"  />
+            <Button x:Name="btnStartCamera" Margin="10,0,0,0" Padding="5,0" FontSize="14" Content="Start Camera" Click="btnStartCamera_Click"/>
         </StackPanel>
     </Grid>
 </Window>

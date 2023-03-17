@@ -30,9 +30,6 @@ namespace MCapture.Webcam2
         {
             InitializeComponent();
 
-            var task = GetVideoDevicesAsync();
-            task.Wait();
-
         }
 
         async private void SetupWebCam()
@@ -76,7 +73,6 @@ namespace MCapture.Webcam2
             System.Windows.Controls.ComboBox cmb = sender as System.Windows.Controls.ComboBox;
             CurrentDevice = (DeviceInformation)cmb.SelectedItem;
             StopCamera();
-            StartCamera();
         }
         
         public async Task<string> GetVideoDevicesAsync()
@@ -119,5 +115,12 @@ namespace MCapture.Webcam2
 
         }
 
+        private void btnStartCamera_Click(object sender, RoutedEventArgs e)
+        {
+            var task = GetVideoDevicesAsync();
+            task.Wait();
+
+            StartCamera();
+        }
     }
 }
