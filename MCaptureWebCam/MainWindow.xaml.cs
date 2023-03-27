@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Media.MediaProperties;
 using System.Collections.Generic;
 
-namespace MCapture.Webcam2
+namespace MCapture.Webcam
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

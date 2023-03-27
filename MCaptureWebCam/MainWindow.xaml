@@ -1,9 +1,9 @@
-﻿<Window x:Class="MCapture.Webcam2.MainWindow"
+﻿<Window x:Class="MCapture.Webcam.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MCapture.Webcam2"
+        xmlns:local="clr-namespace:MCapture.Webcam"
         
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Media Capture Camera" Height="400" Width="500">
