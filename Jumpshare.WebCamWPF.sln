@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Webcam", "AForgeWebc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCapture.Webcam", "MCaptureWebCam\MCapture.Webcam.csproj", "{D2EDE865-2BD0-40EA-9B5B-83EDFF0ABA08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accord.Webcam", "AccordWebcam\Accord.Webcam.csproj", "{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{D2EDE865-2BD0-40EA-9B5B-83EDFF0ABA08}.Release|x64.Build.0 = Release|x64
 		{D2EDE865-2BD0-40EA-9B5B-83EDFF0ABA08}.Release|x86.ActiveCfg = Release|Any CPU
 		{D2EDE865-2BD0-40EA-9B5B-83EDFF0ABA08}.Release|x86.Build.0 = Release|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|x64.ActiveCfg = Debug|x64
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|x64.Build.0 = Debug|x64
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|x64.ActiveCfg = Release|x64
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|x64.Build.0 = Release|x64
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
