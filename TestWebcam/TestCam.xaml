@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test.Webcam" 
-        xmlns:aforge="clr-namespace:AForge.Controls;assembly=AForge.Controls"
         xmlns:winforms="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Test Camera" Height="400" Width="500">

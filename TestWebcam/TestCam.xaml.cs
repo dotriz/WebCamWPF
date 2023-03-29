@@ -17,6 +17,7 @@ namespace Test.Webcam
     /// </summary>
     public partial class MainWindow : Window
     {
+        private VideoCaptureDevice _videoSource;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,36 +51,6 @@ namespace Test.Webcam
             this.DataContext = this;
             GetVideoDevices();
 
-            var videoDevice = new VideoCaptureDevice(); // Create a new VideoCaptureDevice object
-            var videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice); // Get a list of available video devices
-
-            // Select the first available video device (you can customize this based on your requirements)
-            if (videoDevices.Count > 0)
-            {
-                videoDevice = new VideoCaptureDevice(videoDevices[0].MonikerString);
-            }
-
-            VideoCapabilities SelectedVC = videoDevice.VideoCapabilities[0];
-            foreach (var cap in videoDevice.VideoCapabilities)
-            {
-                if (cap.FrameSize.Height == 720)
-                {
-                    //We have decided to use 720p resolution for camera for faster processing
-                    SelectedVC = cap;
-                    break;
-                }
-            }
-            videoDevice.VideoResolution = SelectedVC;
-
-
-            var videoPlayer = new VideoSourcePlayer();
-            videoPlayer.VideoSource = videoDevice;
-            videoPlayer.Start();
-
-            windowsFormsHost.Child = videoPlayer;
-
-            //grid.Children.Add(windowsFormsHost); // Add the WindowsFormsHost control to the grid
-
         }
 
         private void GetVideoDevices()
@@ -109,13 +80,41 @@ namespace Test.Webcam
         {
             if (CurrentDevice != null)
             {
-                
+                try
+                {
+                    _videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
+
+                    VideoCapabilities SelectedVC = _videoSource.VideoCapabilities[0];
+                    foreach (var cap in _videoSource.VideoCapabilities)
+                    {
+                        if (cap.FrameSize.Height == 720)
+                        {
+                            SelectedVC = cap;
+                            break;
+                        }
+                    }
+                    _videoSource.VideoResolution = SelectedVC;
+
+
+                    var videoPlayer = new VideoSourcePlayer();
+                    videoPlayer.VideoSource = _videoSource;
+                    videoPlayer.Start();
+
+                    windowsFormsHost.Child = videoPlayer;
+                }
+                catch
+                {
+
+                }
             }
         }
 
         private void StopCamera()
         {
-            
+            if (_videoSource != null && _videoSource.IsRunning)
+            {
+                _videoSource.SignalToStop();
+            }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
