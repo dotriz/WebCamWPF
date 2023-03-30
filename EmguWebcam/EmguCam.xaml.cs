@@ -1,8 +1,6 @@
 ﻿using AForge.Video.DirectShow;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
