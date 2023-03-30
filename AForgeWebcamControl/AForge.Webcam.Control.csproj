@@ -81,7 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="WebCamController.cs" />
-    <Page Include="TestCam.xaml">
+    <Page Include="AForgeCamControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -89,8 +89,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TestCam.xaml.cs">
-      <DependentUpon>TestCam.xaml</DependentUpon>
+    <Compile Include="AForgeCamControl.xaml.cs">
+      <DependentUpon>AForgeCamControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using AForge.Video;
 
-namespace Test.Webcam
+namespace AForge.Webcam.Control
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -39,8 +39,6 @@ namespace Test.Webcam
         }
 
         public string SelectedWebcam { get; set; }
-        public int WebCamPixelWidth { get; private set; }
-        public int WebCamPixelHeight { get; private set; }
 
 
         #endregion
@@ -56,24 +54,7 @@ namespace Test.Webcam
         private void GetVideoDevices()
         {
             VideoDevices = new WebCamController().VideoDevices;
-            if (VideoDevices.Any())
-            {
-                bool matchFound = false;
-                foreach (var device in VideoDevices)
-                {
-                    if (SelectedWebcam.Equals(device.Name))
-                    {
-                        matchFound = true;
-                        CurrentDevice = device;
-                    }
-                }
-                if (!matchFound) CurrentDevice = VideoDevices[0];
-            }
-            else
-            {
-                //TODO send windows notification
-                //MessageBox.Show("No video sources found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (VideoDevices.Any()) CurrentDevice = VideoDevices[0];
         }
 
         private void StartCamera()
@@ -96,11 +77,13 @@ namespace Test.Webcam
                     _videoSource.VideoResolution = SelectedVC;
 
 
-                    var videoPlayer = new VideoSourcePlayer();
-                    videoPlayer.VideoSource = _videoSource;
-                    videoPlayer.BorderColor = System.Drawing.Color.Transparent;
-                    // Want to hide connectin etc text message, so making it transparent
-                    videoPlayer.ForeColor = System.Drawing.Color.Transparent;
+                    var videoPlayer = new VideoSourcePlayer
+                    {
+                        VideoSource = _videoSource,
+                        BorderColor = System.Drawing.Color.Transparent,
+                        // Want to hide connectin etc text message, so making it transparent
+                        ForeColor = System.Drawing.Color.Transparent
+                    };
                     videoPlayer.Start();
 
                     windowsFormsHost.Child = videoPlayer;

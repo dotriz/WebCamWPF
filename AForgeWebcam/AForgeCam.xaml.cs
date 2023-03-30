@@ -80,11 +80,10 @@ namespace AForge.Webcam
                     bi = ToBitmapImage(bitmap);
                 }
                 bi.Freeze(); // avoid cross thread operations and prevents leaks
-
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.Invoke(() =>
                 {
                     CurrentFrame = bi;
-                }));
+                });
 
                 if (!WebCamInitialised) WebCamInitialised = true;
             }

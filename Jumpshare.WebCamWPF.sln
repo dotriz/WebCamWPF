@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCapture.Webcam", "MCapture
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accord.Webcam", "AccordWebcam\Accord.Webcam.csproj", "{1D38F4CA-D30B-4900-9B6C-EC9E9D6DE6C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Webcam", "TestWebcam\Test.Webcam.csproj", "{BC46843C-0409-43BE-B5E8-959255A3474C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Webcam.Control", "AForgeWebcamControl\AForge.Webcam.Control.csproj", "{BC46843C-0409-43BE-B5E8-959255A3474C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

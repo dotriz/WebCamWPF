@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        
+
         <Ellipse Grid.Row="0" x:Name="WebCamPlayerCircleContainer" Tag="WebCamPlayer" Width="300" Height="300" RenderTransformOrigin="0.5,0.5">
             <Ellipse.Fill>
                 <ImageBrush x:Name="WebCamPlayerCircle" Stretch="UniformToFill" ImageSource="{Binding Path=CurrentFrame}" />

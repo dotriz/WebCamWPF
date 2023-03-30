@@ -1,12 +1,12 @@
-﻿<Window x:Class="Test.Webcam.MainWindow"
+﻿<Window x:Class="AForge.Webcam.Control.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Test.Webcam" 
+        xmlns:local="clr-namespace:AForge.Webcam.Control" 
         xmlns:winforms="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Test Camera" Height="400" Width="500">
+        Title="Aforge Cam Camera" Height="400" Width="500">
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -19,7 +19,11 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <winforms:WindowsFormsHost Width="350" Height="200" x:Name="windowsFormsHost" />
+        <winforms:WindowsFormsHost x:Name="windowsFormsHost" ClipToBounds="True" Width="350" Height="200" >
+            <WindowsFormsHost.Clip>
+                <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+            </WindowsFormsHost.Clip>
+        </winforms:WindowsFormsHost>
 
         <StackPanel Grid.Row="1"  Orientation="Horizontal" DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Left">
             <ComboBox x:Name="comboBox" Width="200" Margin="10,0,0,0" FontSize="14"
