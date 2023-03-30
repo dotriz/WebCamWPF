@@ -98,6 +98,9 @@ namespace Test.Webcam
 
                     var videoPlayer = new VideoSourcePlayer();
                     videoPlayer.VideoSource = _videoSource;
+                    videoPlayer.BorderColor = System.Drawing.Color.Transparent;
+                    // Want to hide connectin etc text message, so making it transparent
+                    videoPlayer.ForeColor = System.Drawing.Color.Transparent;
                     videoPlayer.Start();
 
                     windowsFormsHost.Child = videoPlayer;
