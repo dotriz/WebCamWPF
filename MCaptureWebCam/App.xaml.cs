@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using CamHelper;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 

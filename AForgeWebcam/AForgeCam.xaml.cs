@@ -1,4 +1,5 @@
 ﻿using AForge.Video.DirectShow;
+using CamHelper;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -118,20 +119,26 @@ namespace AForge.Webcam
                     _videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
                     _videoSource.NewFrame += video_NewFrame;
                     VideoCapabilities SelectedVC = _videoSource.VideoCapabilities[0];
+                    string availableOption = CurrentDevice.Name + " ... ";
                     foreach (var cap in _videoSource.VideoCapabilities)
                     {
+                        availableOption += cap.FrameSize.Width + "x" + cap.FrameSize.Height + " at " + cap.AverageFrameRate + " ... ";
                         if (cap.FrameSize.Height == 720)
                         {
                             SelectedVC = cap;
                             break;
                         }
                     }
+                    JSLog.Log("Available Fallback Camera Resolution: " + availableOption, JSLog.LogType.INFO);
+
                     _videoSource.VideoResolution = SelectedVC;
+                    JSLog.Log("Selected Resolution: " + SelectedVC.FrameSize.Width + "x" + SelectedVC.FrameSize.Height + " at " + SelectedVC.AverageFrameRate, JSLog.LogType.INFO);
                     _videoSource.Start();
                 }
                 catch (Exception e)
                 {
                     //Unable to start camera
+                    JSLog.Log("Fallback Camera Exception: " + e.ToString(), JSLog.LogType.INFO);
                 }
             }
         }

@@ -1,17 +1,14 @@
 ﻿using MediaCaptureWPF;
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Windows.Devices.Enumeration;
 using Windows.Media.Capture;
-using System.Windows.Controls;
-using System.ComponentModel;
 using System.Linq;
-using Windows.UI.Xaml.Controls;
 using Windows.Media.MediaProperties;
-using System.Collections.Generic;
+using System.Windows.Media;
+using CamHelper;
 
 namespace MCapture.Webcam
 {
@@ -20,6 +17,7 @@ namespace MCapture.Webcam
     /// </summary>
     public partial class MainWindow : Window
     {
+        MediaCapture captureManager;
         public ObservableCollection<DeviceInformation> VideoDevices { get; set; }
         public DeviceInformation CurrentDevice
         {
@@ -36,7 +34,7 @@ namespace MCapture.Webcam
         {
             try
             {
-                var captureManager = new MediaCapture();
+                captureManager = new MediaCapture();
                 var mediaInitSettings = new MediaCaptureInitializationSettings { VideoDeviceId = CurrentDevice.Id };
                 await captureManager.InitializeAsync(mediaInitSettings);
 
@@ -51,7 +49,13 @@ namespace MCapture.Webcam
 
                 var preview = new CapturePreview(captureManager);
                 WebCamPlayerCircle.ImageSource = preview;
+                WebCamPlayerCircleContainer.RenderTransform = new ScaleTransform(-1, 1);
                 await preview.StartAsync();
+
+                var WebCamPixelWidth = (int)((VideoEncodingProperties)resolution).Width;
+                var WebCamPixelHeight = (int)((VideoEncodingProperties)resolution).Height;
+                JSLog.Log("Selected Media Capture Camera Resolution: " + WebCamPixelWidth + "x" + WebCamPixelHeight, JSLog.LogType.INFO);
+
             } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -63,9 +67,16 @@ namespace MCapture.Webcam
             SetupWebCam();
         }
 
-        private void StopCamera()
+        private async void StopCamera()
         {
-            //
+            if (captureManager != null)
+            {
+                try
+                {
+                    await captureManager.StopPreviewAsync();
+                }
+                catch { }
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -73,6 +84,7 @@ namespace MCapture.Webcam
             System.Windows.Controls.ComboBox cmb = sender as System.Windows.Controls.ComboBox;
             CurrentDevice = (DeviceInformation)cmb.SelectedItem;
             StopCamera();
+            StartCamera();
         }
         
         public async Task<string> GetVideoDevicesAsync()
@@ -92,25 +104,6 @@ namespace MCapture.Webcam
             comboBox.ItemsSource = VideoDevices;
             comboBox.SelectedItem = CurrentDevice;
 
-            //if (VideoDevices.Any())
-            //{
-            //    bool matchFound = false;
-            //    foreach (var device in VideoDevices)
-            //    {
-            //        if (SelectedWebcam.Equals(device.Name))
-            //        {
-            //            matchFound = true;
-            //            CurrentDevice = device;
-            //        }
-            //    }
-            //    if (!matchFound) CurrentDevice = VideoDevices[0];
-            //}
-            //else
-            //{
-            //    //TODO send windows notification
-            //    //MessageBox.Show("No video sources found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-
             return null;
 
         }
@@ -120,7 +113,7 @@ namespace MCapture.Webcam
             var task = GetVideoDevicesAsync();
             task.Wait();
 
-            StartCamera();
+            btnStartCamera.IsEnabled = false;
         }
     }
 }

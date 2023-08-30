@@ -129,5 +129,11 @@
       <Version>2.2.5</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CamHelper\CamHelper.csproj">
+      <Project>{17881fa4-e1d7-4434-ad81-9568a41d3ee9}</Project>
+      <Name>CamHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

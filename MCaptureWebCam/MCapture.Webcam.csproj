@@ -85,7 +85,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="JSLog.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -119,11 +118,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.22621.755</Version>
+      <Version>10.0.17134.1000</Version>
     </PackageReference>
     <PackageReference Include="MMaitre.MediaCaptureWPF">
       <Version>1.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CamHelper\CamHelper.csproj">
+      <Project>{17881fa4-e1d7-4434-ad81-9568a41d3ee9}</Project>
+      <Name>CamHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

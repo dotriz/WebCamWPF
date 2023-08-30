@@ -1,15 +1,13 @@
 ﻿using System;
 using System.IO;
 
-namespace MCapture.Webcam
+namespace CamHelper
 {
     public static class JSLog
     {
-        public static bool DEV_MODE = false;
 
         public enum LogType
         {
-            FFMPEG = 0,
             INFO = 1,
             CRASH = 2,
             EXCEPTION = 4
@@ -24,7 +22,7 @@ namespace MCapture.Webcam
 
         public static string GetLogFolder()
         {
-            string logFolder = Directory.GetCurrentDirectory() + "\\log";
+            string logFolder = AppContext.BaseDirectory + @"log";
             if (!Directory.Exists(logFolder))
             {
                 try
@@ -44,7 +42,7 @@ namespace MCapture.Webcam
         public static string GetLogFilePath()
         {
             string date = DateTime.Now.ToString("yy-MM");
-            string logpath = GetLogFolder() + "\\jumpshare.log." + date + ".txt";
+            string logpath = GetLogFolder() + @"\logs." + date + ".txt";
             if (!File.Exists(logpath))
             {
                 try
@@ -53,7 +51,7 @@ namespace MCapture.Webcam
                 }
                 catch
                 {
-                    logpath = GetLogFolder() + "\\jumpshare.log.txt";
+                    logpath = GetLogFolder() + @"\logs.txt";
                 }
             }
 
@@ -68,12 +66,8 @@ namespace MCapture.Webcam
 #if DEBUG
                 DebugMode = true;
 #endif
-                if (DEV_MODE) DebugMode = true;
 
-                if (level == LogLevel.TRACE && true) return;
                 if (level == LogLevel.DEBUG && !DebugMode) return;
-
-                if (type == LogType.FFMPEG) data = DebugMode ? data : Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(data));
 
                 File.AppendAllText(GetLogFilePath(), DateTime.Now.ToString("G") + " - " +
                     level.ToString() + " - " +
